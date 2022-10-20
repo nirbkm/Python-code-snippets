@@ -73,6 +73,10 @@ class LoggingLevels(Enum):
 
 
 class Logger:
+    """
+    Custom logger class that exports log to file and stream it to console,
+    based on: https://stackoverflow.com/a/61191934
+    """
     def __init__(self, loggerName, logFileName, loggingLevel = 'DEBUG') -> None:
 
         self.loggerName = loggerName
