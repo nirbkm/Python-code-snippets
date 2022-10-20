@@ -34,7 +34,11 @@ class Color:
 
 
 class ColorLogFormatter(logging.Formatter):
-    """A class for formatting colored logs."""
+    """
+    A class for formatting colored logs.
+    Based on : https://stackoverflow.com/a/70796089
+
+    """
     #%(pathname)s
     FORMAT = "%(prefix)s%(asctime)s - %(name)s - %(levelname)s - line %(lineno)d - %(message)s%(suffix)s"
 
