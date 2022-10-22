@@ -91,13 +91,13 @@ class Logger:
 
         # Stream/console output - handle logging settings for console printing
         self.logger.handler = logging.StreamHandler(sys.stdout)
-        self.logger.handler.setLevel(LoggingLevels[self.loggingLevel].value)
+        self.logger.handler.setLevel(self.loggingLevel)
         self.logger.handler.setFormatter(ColorLogFormatter())
         self.logger.addHandler(self.logger.handler)
 
         # File output - handle logging settings for log file saving
         fh = logging.FileHandler(f"{self.logFileName}.log")
-        fh.setLevel(LoggingLevels[self.loggingLevel].value)
+        fh.setLevel(self.loggingLevel)
         fh.setFormatter(logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s - line %(lineno)d - %(message)s"))
         self.logger.addHandler(fh)
@@ -110,9 +110,9 @@ class Logger:
             isLoggingLevelValid = loggingLevel in [n.name for n in LoggingLevels]
             
             if isLoggingLevelValid:
-                return loggingLevel
+                return LoggingLevels[loggingLevel].value
 
-        return 'DEBUG'
+        return LoggingLevels['DEBUG'].value
 
 
     def __str__(self) -> str:
@@ -132,7 +132,7 @@ class Logger:
 # initiate logger example #
 ###########################
 
-# logger = Logger(logFileName='test', loggerName=Path(sys.argv[0]).parts[-1], loggingLevel='DEBUG')
+# logger = Logger(logFileName='test', loggerName=Path(sys.argv[0]).parts[-1], loggingLevel='debug')
 
 # overwrite default colors
 #logger.logger.warning('dsaa', extra={'prefix': Color.GREEN, 'suffix': Color.END})
