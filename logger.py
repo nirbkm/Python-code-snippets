@@ -31,6 +31,7 @@ class Color:
     BOLD_MAGENTA = BOLD + MAGENTA
     BOLD_BLUE = BOLD + BLUE
     END = "\033[0m"
+    
 
 
 class ColorLogFormatter(logging.Formatter):
@@ -81,27 +82,38 @@ class Logger:
 
         self.loggerName = loggerName
         self.logFileName = logFileName
+        self.loggingLevel = loggingLevel
 
-        try:
-            self.loggingLevel = LoggingLevels[loggingLevel].value
-        except:
-            self.loggingLevel = 'DEBUG'
-            
-
+        self.loggingLevel = self.validateLoggingLevel(self.loggingLevel)
+        #print(LoggingLevels[self.loggingLevel].value)
+        
         self.logger = logging.Logger(self.loggerName)
 
         # Stream/console output - handle logging settings for console printing
         self.logger.handler = logging.StreamHandler(sys.stdout)
-        self.logger.handler.setLevel(self.loggingLevel)
+        self.logger.handler.setLevel(LoggingLevels[self.loggingLevel].value)
         self.logger.handler.setFormatter(ColorLogFormatter())
         self.logger.addHandler(self.logger.handler)
 
         # File output - handle logging settings for log file saving
         fh = logging.FileHandler(f"{self.logFileName}.log")
-        fh.setLevel(self.loggingLevel)
+        fh.setLevel(LoggingLevels[self.loggingLevel].value)
         fh.setFormatter(logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s - line %(lineno)d - %(message)s"))
         self.logger.addHandler(fh)
+
+    def validateLoggingLevel(self, loggingLevel):
+        
+        if type(loggingLevel) == str:
+
+            loggingLevel = loggingLevel.upper()
+            isLoggingLevelValid = loggingLevel in [n.name for n in LoggingLevels]
+            
+            if isLoggingLevelValid:
+                return loggingLevel
+
+        return 'DEBUG'
+
 
     def __str__(self) -> str:
         # use: print(log)
