@@ -2,7 +2,6 @@
 import logging
 import sys
 from enum import Enum
-from pathlib import Path
 
 # formatting options: https://docs.python.org/3/library/logging.html#logrecord-attributes
 # this template of printing logs & saving to file in parallel based on: https://stackoverflow.com/questions/61141419/in-python-i-can-write-a-log-to-console-but-its-not-getting-written-into-file
@@ -114,14 +113,6 @@ class Logger:
 
         return LoggingLevels['DEBUG'].value
 
-
-    def __str__(self) -> str:
-        # use: print(log)
-        return 'This class intendet to use as a general purpose logger'
-
-    def __call__(self, *args, **kwds):
-        # use: log()
-        print('ok ok...')
 
     def setLoggerName(self, name):
         self.logger.name = name
