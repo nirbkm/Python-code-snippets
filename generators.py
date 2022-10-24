@@ -2,7 +2,7 @@ from sys import getsizeof
 from si_prefix import si_format
 import psutil
 
-
+# generator allow you to read / calculate data without the need to load it up to list before, just yield the next value while needed.
 
 def get_used_memory():
     return psutil.virtual_memory().used

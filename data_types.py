@@ -14,3 +14,12 @@ thisset = {"apple", "banana", "cherry"}
 #print(thisset)
 
 
+# May be off topic in terms of the question OP asked-
+# 
+# List: A unhashsable collection of ordered, mutable objects.
+# Tuple: A hashable collection of ordered, immutable objects, like list.
+# Set: An unhashable collection of unordered, mutable and distinct objects.
+# Frozenset: A hashable collection of unordered, immutable and distinct objects.
+# Dictionary : A unhashable,unordered collection of mutable objects that maps hashable values to arbitrary values.
+
+
