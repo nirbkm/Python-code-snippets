@@ -5,7 +5,7 @@ import logging
 def pyVScodeRunner(orig_func):
     logging.basicConfig(
          level=logging.INFO, 
-         format= '\033[93m[%(asctime)s] - %(message)s\033[0m',
+         format= '\033[93m[%(asctime)s] - %(message)s\033[0m\n',
          datefmt='%H:%M:%S'
      )
 
@@ -14,20 +14,24 @@ def pyVScodeRunner(orig_func):
         logging.info('Started Code Run')
         t1 = time.perf_counter()
         result = orig_func(*args, **kwargs)
-
-        logging.info(f'[ {orig_func.__name__} ] ran in: {time.perf_counter() - t1:.5f} sec')
+        print('\n')
+        logging.info(f'[ {orig_func.__name__} ] ran in: {time.perf_counter() - t1:.5f} sec\n')
 
         return result
 
     return wrapper
 
 
-#@pyVScodeRunner
-#def helloWorld(data):
-#    print('hello world running')
-#    time.sleep(3)
-#    print('second hellp')
-#
-#
-#if __name__ == '__main__':
-#    helloWorld('this is the data')
+# import time
+# from pyvscode_runner import pyVScodeRunner
+
+
+# @pyVScodeRunner
+# def main():
+#     for index in range(15):
+#         print(index)
+#         time.sleep(0.25)
+
+
+# if __name__ == '__main__':
+#     main()
