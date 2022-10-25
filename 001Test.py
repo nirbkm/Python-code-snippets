@@ -1,3 +1,10 @@
+from pyvscode_runner import pyVScodeRunner
 
-# coloring console output
-print("\033[36mHello world!\033[0m")
+
+@pyVScodeRunner
+def main():
+    print('hi')
+
+
+if __name__ == '__main__':
+    main()
