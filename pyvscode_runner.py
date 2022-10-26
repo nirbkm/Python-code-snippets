@@ -3,6 +3,14 @@ import time
 import logging
 
 def pyVScodeRunner(orig_func):
+    """Provides printing to console of execution time, start & stop titles.
+
+    Args:
+        orig_func (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     logging.basicConfig(
          level=logging.INFO, 
          format= '\033[93m[%(asctime)s] - %(message)s\033[0m\n',
