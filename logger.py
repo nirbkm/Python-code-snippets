@@ -1,4 +1,3 @@
-
 import logging
 import sys
 from enum import Enum
@@ -30,7 +29,6 @@ class Color:
     BOLD_MAGENTA = BOLD + MAGENTA
     BOLD_BLUE = BOLD + BLUE
     END = "\033[0m"
-    
 
 
 class ColorLogFormatter(logging.Formatter):
@@ -39,26 +37,29 @@ class ColorLogFormatter(logging.Formatter):
     Based on : https://stackoverflow.com/a/70796089
 
     """
+
     #%(pathname)s
     FORMAT = "%(prefix)s%(asctime)s - %(name)s - %(levelname)s - line %(lineno)d - %(message)s%(suffix)s"
 
     LOG_LEVEL_COLOR = {
-        "DEBUG": {'prefix': Color.CYAN, 'suffix': Color.END},
-        "INFO": {'prefix': Color.MAGENTA, 'suffix': Color.END},
-        "WARNING": {'prefix': Color.YELLOW, 'suffix': Color.END},
-        "ERROR": {'prefix': Color.RED, 'suffix': Color.END},
-        "CRITICAL": {'prefix': Color.RED, 'suffix': Color.END},
+        "DEBUG": {"prefix": Color.CYAN, "suffix": Color.END},
+        "INFO": {"prefix": Color.MAGENTA, "suffix": Color.END},
+        "WARNING": {"prefix": Color.YELLOW, "suffix": Color.END},
+        "ERROR": {"prefix": Color.RED, "suffix": Color.END},
+        "CRITICAL": {"prefix": Color.RED, "suffix": Color.END},
     }
 
     def format(self, record):
         """Format log records with a default prefix and suffix to terminal color codes that corresponds to the log level name."""
-        if not hasattr(record, 'prefix'):
-            record.prefix = self.LOG_LEVEL_COLOR.get(
-                record.levelname.upper()).get('prefix')
+        if not hasattr(record, "prefix"):
+            record.prefix = self.LOG_LEVEL_COLOR.get(record.levelname.upper()).get(
+                "prefix"
+            )
 
-        if not hasattr(record, 'suffix'):
-            record.suffix = self.LOG_LEVEL_COLOR.get(
-                record.levelname.upper()).get('suffix')
+        if not hasattr(record, "suffix"):
+            record.suffix = self.LOG_LEVEL_COLOR.get(record.levelname.upper()).get(
+                "suffix"
+            )
 
         formatter = logging.Formatter(self.FORMAT)
         return formatter.format(record)
@@ -77,15 +78,16 @@ class Logger:
     Custom logger class that exports log to file and stream it to console,
     based on: https://stackoverflow.com/a/61191934
     """
-    def __init__(self, loggerName, logFileName, loggingLevel = 'DEBUG') -> None:
+
+    def __init__(self, loggerName, logFileName, loggingLevel="DEBUG") -> None:
 
         self.loggerName = loggerName
         self.logFileName = logFileName
         self.loggingLevel = loggingLevel
 
         self.loggingLevel = self.validateLoggingLevel(self.loggingLevel)
-        #print(LoggingLevels[self.loggingLevel].value)
-        
+        # print(LoggingLevels[self.loggingLevel].value)
+
         self.logger = logging.Logger(self.loggerName)
 
         # Stream/console output - handle logging settings for console printing
@@ -97,26 +99,27 @@ class Logger:
         # File output - handle logging settings for log file saving
         fh = logging.FileHandler(f"{self.logFileName}.log")
         fh.setLevel(self.loggingLevel)
-        fh.setFormatter(logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - line %(lineno)d - %(message)s"))
+        fh.setFormatter(
+            logging.Formatter(
+                "%(asctime)s - %(name)s - %(levelname)s - line %(lineno)d - %(message)s"
+            )
+        )
         self.logger.addHandler(fh)
 
     def validateLoggingLevel(self, loggingLevel):
-        
+
         if type(loggingLevel) == str:
 
             loggingLevel = loggingLevel.upper()
             isLoggingLevelValid = loggingLevel in [n.name for n in LoggingLevels]
-            
+
             if isLoggingLevelValid:
                 return LoggingLevels[loggingLevel].value
 
-        return LoggingLevels['DEBUG'].value
-
+        return LoggingLevels["DEBUG"].value
 
     def setLoggerName(self, name):
         self.logger.name = name
-
 
 
 ###########################
@@ -126,7 +129,7 @@ class Logger:
 # logger = Logger(logFileName='test', loggerName=Path(sys.argv[0]).parts[-1], loggingLevel='debug')
 
 # overwrite default colors
-#logger.logger.warning('dsaa', extra={'prefix': Color.GREEN, 'suffix': Color.END})
+# logger.logger.warning('dsaa', extra={'prefix': Color.GREEN, 'suffix': Color.END})
 
 # just examples of different levels
 # logger.logger.debug('dsaa')

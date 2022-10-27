@@ -1,25 +1,23 @@
-
-
-#The filter() method filters the given sequence with the help of a function that tests each element in the sequence to be true or not.
+# The filter() method filters the given sequence with the help of a function that tests each element in the sequence to be true or not.
 
 ### oneline with lambda!!#
 
 
 # function that filters vowels
 def fun(variable):
-    letters = ['a', 'e', 'i', 'o', 'u']
-    if (variable in letters):
+    letters = ["a", "e", "i", "o", "u"]
+    if variable in letters:
         return True
     else:
         return False
-  
-  
+
+
 # sequence
-sequence = ['g', 'e', 'e', 'j', 'k', 's', 'p', 'r']
-  
+sequence = ["g", "e", "e", "j", "k", "s", "p", "r"]
+
 # using filter function
 filtered = filter(fun, sequence)
-  
-print('The filtered letters are:')
+
+print("The filtered letters are:")
 for s in filtered:
     print(s)

@@ -1,29 +1,29 @@
-
 # Magic or Dunder Methods - double underscore __init__ for exmp
 # references:
-    # https://rszalski.github.io/magicmethods/
-    # https://www.tutorialsteacher.com/python/magic-methods-in-python
+# https://rszalski.github.io/magicmethods/
+# https://www.tutorialsteacher.com/python/magic-methods-in-python
 
 
-# check class magic methods: 
-#dir(class_name)
+# check class magic methods:
+# dir(class_name)
 
 
 class addTwoNumbers(object):
-        
     def __init__(self, a, b) -> None:
         self.a = a
         self.b = b
 
         # print('init')
-    
-    def __str__(self):
-        return f'This function adds up {self.a} with {self.b}'
 
-    def __index__(self): ## need for type conversion as hex, to return the number to convert, cant use __hex__ directly on class varialbles
+    def __str__(self):
+        return f"This function adds up {self.a} with {self.b}"
+
+    def __index__(
+        self,
+    ):  ## need for type conversion as hex, to return the number to convert, cant use __hex__ directly on class varialbles
         print("Index is being called")
         return self.a
-    
+
     def __hex__(self, val):
         return hex(val)
 
@@ -31,23 +31,24 @@ class addTwoNumbers(object):
         return int(self.a)
 
     def __add__(self, other):
-        return self.a + self.b +  other
+        return self.a + self.b + other
 
-    def __getattribute__(self, attr): #calls each time attribute is being called (className.something)
+    def __getattribute__(
+        self, attr
+    ):  # calls each time attribute is being called (className.something)
         # print(f"__getattribute__ : {attr}") # custom funcionality
-        return object.__getattribute__(self, attr) # have to be here to maintain function functunality 
+        return object.__getattribute__(
+            self, attr
+        )  # have to be here to maintain function functunality
 
-    def __getattr__(self, attr) : # calls when attribute is being called but not exist in the class
+    def __getattr__(
+        self, attr
+    ):  # calls when attribute is being called but not exist in the class
         # print(f'__getattr__ Attribute does not exist: {attr}')
         return None
-    
-
-    
 
 
-
-
-t = addTwoNumbers(5,10)
+t = addTwoNumbers(5, 10)
 
 # print(str(t))
 # print(repr(t))
@@ -56,12 +57,9 @@ print(int(t))
 
 # x = t.does_not_exist
 # print(f"x: {x}")
-# 
-# 
+#
+#
 # print(f"Add: {t + 1}") # add
-
-
-
 
 
 #####################
@@ -72,7 +70,7 @@ print(int(t))
 # To make Thing usable for dict you have to implement both hash and eq.
 
 
-#__new__(cls, other)	To get called in an object's instantiation.
+# __new__(cls, other)	To get called in an object's instantiation.
 # __init__(self, other)	To get called by the __new__ method.
 # __del__(self)	Destructor method.
 
