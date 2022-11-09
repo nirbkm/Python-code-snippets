@@ -1,5 +1,57 @@
 from dataclasses import dataclass
 
+"""
+# @classmethod is the way to call function not only as an instance of a class but also ***directly*** by the class itself as its first argument.
+# The class method can only access the class attributes but not the instance attributes.
+
+# @staticmethod is a way of putting a function into a class (because it logically belongs there), while indicating that it does not require access to the class (so we don't need to use self in function definition).
+# It cannot access either class attributes or instance attributes.
+
+# https://www.tutorialsteacher.com/python/classmethod-decorator
+# https://stackoverflow.com/a/65754079
+
+
+class DecoratorTest(object):
+    factor = 1  # class attribute
+
+    def __init__(self):
+        self.instance_factor = 2  # instance attribute
+        pass
+
+    def doubler(self, x):
+        return x * 2
+
+    @classmethod
+    def class_doubler(
+        cls, x
+    ):  # we need to use 'cls' instead of 'self'; 'cls' reference to the class instead of an instance of the class
+        return (
+            x * 2
+        ) + cls.factor  # cannot accsses self.instance_factor, only cls.factor
+
+    @staticmethod
+    def static_doubler(
+        x,
+    ):  # no need adding 'self' here; static_doubler() could be just a function not inside the class
+        return x * 2  # cannot accsses either self.instance_factor and cls.factor
+
+
+decor = DecoratorTest()
+
+print(decor.doubler(5))
+print(
+    DecoratorTest.doubler(5)
+)  # cannot accses directly since doubler is not classmethod!!
+
+print(decor.class_doubler(5))  # a call with an instance of a class
+print(DecoratorTest.class_doubler(5))  # a direct call by the class itself
+
+# staticmethod could be called in the same way as classmethod.
+print(decor.static_doubler(5))  # as an instance of the class
+print(DecoratorTest.static_doubler(5))  # or as a direct call
+"""
+
+"""
 # property allows you to add getter and setter functionality over setting and getting values from function.
 class Celsius:
     def __init__(self, temperature):
@@ -26,7 +78,7 @@ c = Celsius(100)
 print(c.temperature)
 
 c.temperature = -300
-
+"""
 
 """
 @dataclass(frozen=True, order=True)
