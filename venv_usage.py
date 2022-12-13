@@ -12,6 +12,7 @@
 # activate: 'venvName/Scripts/activate.ps1'
 # deactivate: 'deactivate'
 
+#generate requirements.txt : pip freeze > requirements.txt
 
 # get venv path : 'python  -c "import os; print(os.environ['VIRTUAL_ENV'])"'
 
