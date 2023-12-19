@@ -9,7 +9,7 @@
 # create new venv
 # 'python -m venv venvName'
 # 'python -m venv venvName --system-site-packages'  this will allow the new env to use system active python version installed packages, that were installed globaly or without activating any env, can be changed manually in venv library, pyvenv.cfg
-# activate: 'venvName/Scripts/activate.ps1'
+# activate: 'venvName/Scripts/activate.ps1' ( on gitbash source activate )
 # deactivate: 'deactivate'
 
 #generate requirements.txt : pip freeze > requirements.txt
